@@ -17,10 +17,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import ch.qos.logback.core.joran.spi.SaxEventInterpretationContext;
 import org.xml.sax.Attributes;
 
 import ch.qos.logback.core.joran.action.Action;
-import ch.qos.logback.core.joran.spi.InterpretationContext;
 import ch.qos.logback.core.joran.util.PropertySetter;
 import ch.qos.logback.core.joran.util.beans.BeanDescriptionCache;
 import ch.qos.logback.core.util.OptionHelper;
@@ -46,7 +46,8 @@ public class BindDataSourceToJNDIAction extends Action {
      * Instantiates an a data source and bind it to JNDI
      * Most of the required parameters are placed in the ec.substitutionProperties
      */
-    public void begin(InterpretationContext ec, String localName, Attributes attributes) {
+    @Override
+    public void begin(SaxEventInterpretationContext ec, String localName, Attributes attributes) {
         String dsClassName = ec.getProperty(DATA_SOURCE_CLASS);
 
         if (OptionHelper.isEmpty(dsClassName)) {
@@ -86,6 +87,7 @@ public class BindDataSourceToJNDIAction extends Action {
         }
     }
 
-    public void end(InterpretationContext ec, String name) {
+    @Override
+    public void end(SaxEventInterpretationContext ec, String name) {
     }
 }

@@ -13,28 +13,24 @@
  */
 package ch.qos.logback.access.db;
 
-import static org.junit.Assert.assertEquals;
 
 import java.util.Random;
 
-import ch.qos.logback.access.spi.IAccessEvent;
-import ch.qos.logback.core.status.StatusChecker;
+import ch.qos.logback.access.common.joran.JoranConfigurator;
+import ch.qos.logback.access.common.spi.AccessContext;
+import ch.qos.logback.access.common.spi.IAccessEvent;
+import ch.qos.logback.core.status.testUtil.StatusChecker;
 import ch.qos.logback.core.testUtil.EnvUtilForTests;
 import ch.qos.logback.core.util.EnvUtil;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
 
 import ch.qos.logback.access.dummy.DummyAccessEventBuilder;
-import ch.qos.logback.access.joran.JoranConfigurator;
-import ch.qos.logback.access.spi.AccessContext;
 import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.joran.spi.JoranException;
 import ch.qos.logback.core.status.Status;
 import ch.qos.logback.core.util.StatusPrinter;
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DBAppenderIntegrationTest {
 
@@ -45,19 +41,19 @@ public class DBAppenderIntegrationTest {
     AccessContext context = new AccessContext();
     StatusChecker statusChecker = new StatusChecker(context);
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws Exception {
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() throws Exception {
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
 
     }
@@ -98,7 +94,7 @@ public class DBAppenderIntegrationTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void oracle10g() throws Exception {
         // perform test only on conforming hosts
         if (!isConformingHostAndJDK16OrHigher()) {
@@ -108,7 +104,7 @@ public class DBAppenderIntegrationTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void oracle11g() throws Exception {
         // perform test only on conforming hosts
         if (!isConformingHostAndJDK16OrHigher()) {

@@ -7,7 +7,7 @@
 
   <groupId>ch.qos.logback.db</groupId>
   <artifactId>logback-parent-db</artifactId>
-  <version>1.2.11.1</version>
+  <version>1.5.32.1</version>
   <packaging>pom</packaging>
 
   <name>Logback-db-Parent</name>
@@ -46,28 +46,27 @@
 
   <properties>
      <!-- yyyy-MM-dd'T'HH:mm:ss'Z' -->
-    <project.build.outputTimestamp>2022-04-20T19:24:00Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2026-02-26T12:59:45Z</project.build.outputTimestamp>
 
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <logback.version>1.2.11</logback.version>
-    <junit.version>4.10</junit.version>      
-    <java.servlet-api.version>3.1.0</java.servlet-api.version>
-    <hsqldb.version>2.5.1</hsqldb.version>
-    <h2.version>2.1.212</h2.version>
-    <mysql.version>8.0.28</mysql.version>
-    <postgresql.version>42.3.3</postgresql.version>
+    <logback.version>1.5.32</logback.version>
+    <junit.version>6.0.3</junit.version>
+    <java.servlet-api.version>6.1.0</java.servlet-api.version>
+    <hsqldb.version>2.7.4</hsqldb.version>
+    <h2.version>2.4.240</h2.version>
+    <mysql.version>9.6.0</mysql.version>
+    <postgresql.version>42.7.10</postgresql.version>
     
-    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-    <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>    
-    <maven-site-plugin.version>3.7.1</maven-site-plugin.version>
-    <maven-javadoc-plugin.version>3.1.0</maven-javadoc-plugin.version>
-    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-    <maven-license-plugin.version>3.0</maven-license-plugin.version>
-    <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
-    <maven-jxr-plugin.version>3.1.1</maven-jxr-plugin.version>
-    <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+    <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
+    <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+    <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
+    <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+    <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
+    <maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version>
+    <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
 
   </properties>
 
@@ -87,8 +86,14 @@
 
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
@@ -100,7 +105,7 @@
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>1.7.1</version>
+        <version>3.27.7</version>
       </dependency>
 
 
@@ -148,8 +153,8 @@
         <version>${postgresql.version}</version>
       </dependency>
       <dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
         <version>${mysql.version}</version>
       </dependency>
 

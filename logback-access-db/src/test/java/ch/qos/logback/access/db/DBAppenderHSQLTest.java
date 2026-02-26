@@ -13,29 +13,23 @@
  */
 package ch.qos.logback.access.db;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import ch.qos.logback.access.spi.IAccessEvent;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
+import ch.qos.logback.access.common.spi.AccessContext;
+import ch.qos.logback.access.common.spi.AccessEvent;
+import ch.qos.logback.access.common.spi.IAccessEvent;
+import ch.qos.logback.access.dummy.DummyContext;
 import ch.qos.logback.access.dummy.DummyRequest;
 import ch.qos.logback.access.dummy.DummyResponse;
 import ch.qos.logback.access.dummy.DummyServerAdapter;
-import ch.qos.logback.access.spi.AccessContext;
-import ch.qos.logback.access.spi.AccessEvent;
 import ch.qos.logback.core.db.DriverManagerConnectionSource;
 import ch.qos.logback.core.util.StatusPrinter;
+import org.junit.jupiter.api.*;
+
+import static org.assertj.core.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DBAppenderHSQLTest {
     static DBAppenderHSQLTestFixture DB_APPENDER_HSQL_TEST_FIXTURE;
@@ -47,18 +41,18 @@ public class DBAppenderHSQLTest {
     int existingEventTableRowCount;
     Statement stmt;
 
-    @BeforeClass
+    @BeforeAll
     static public void fixtureSetUp() throws SQLException {
         DB_APPENDER_HSQL_TEST_FIXTURE = new DBAppenderHSQLTestFixture();
         DB_APPENDER_HSQL_TEST_FIXTURE.setUp();
     }
 
-    @AfterClass
+    @AfterAll
     static public void fixtureTearDown() throws SQLException {
         DB_APPENDER_HSQL_TEST_FIXTURE.tearDown();
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws SQLException {
         context = new AccessContext();
         context.setName("default");
@@ -78,7 +72,7 @@ public class DBAppenderHSQLTest {
         existingEventTableRowCount = existingEventTableRowCount(stmt);
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws SQLException {
         context = null;
         appender = null;
@@ -215,7 +209,8 @@ public class DBAppenderHSQLTest {
         request.setRequestUri(uri);
         DummyResponse response = new DummyResponse();
         DummyServerAdapter adapter = new DummyServerAdapter(request, response);
+        DummyContext context = new DummyContext();
 
-        return new AccessEvent(request, response, adapter);
+        return new AccessEvent(context, request, response, adapter);
     }
 }

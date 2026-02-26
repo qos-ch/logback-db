@@ -13,8 +13,6 @@
  */
 package ch.qos.logback.classic.db;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -24,6 +22,8 @@ import java.util.Properties;
 import org.hsqldb.Server;
 import org.hsqldb.jdbcDriver;
 import org.hsqldb.server.ServerConstants;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DBAppenderHSQLTestFixture {
 

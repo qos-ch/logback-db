@@ -13,12 +13,11 @@
  */
 package ch.qos.logback.classic.db;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.junit.platform.suite.api.SelectClasses;
+import org.junit.platform.suite.api.Suite;
 
-@RunWith(Suite.class)
-@SuiteClasses({ DBAppenderHSQLTest.class, DBAppenderH2Test.class, DBAppenderIntegrationTest.class, SQLBuilderTest.class,
+@Suite
+@SelectClasses({ DBAppenderHSQLTest.class, DBAppenderH2Test.class, DBAppenderIntegrationTest.class, SQLBuilderTest.class,
         ch.qos.logback.classic.db.names.PackageTest.class })
 public class PackageTest {
 }

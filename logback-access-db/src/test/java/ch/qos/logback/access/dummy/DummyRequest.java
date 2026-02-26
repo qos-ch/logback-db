@@ -13,10 +13,10 @@
  */
 package ch.qos.logback.access.dummy;
 
-import ch.qos.logback.access.AccessConstants;
+import ch.qos.logback.access.common.AccessConstants;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -247,6 +247,21 @@ public class DummyRequest implements HttpServletRequest {
 
     public DispatcherType getDispatcherType() {
         return null; // To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String getRequestId() {
+        return "";
+    }
+
+    @Override
+    public String getProtocolRequestId() {
+        return "";
+    }
+
+    @Override
+    public ServletConnection getServletConnection() {
+        return null;
     }
 
     public Locale getLocale() {

@@ -13,7 +13,8 @@
  */
 package ch.qos.logback.access.dummy;
 
-import ch.qos.logback.access.spi.ServerAdapter;
+
+import ch.qos.logback.access.common.spi.ServerAdapter;
 
 import java.util.Map;
 
