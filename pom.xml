@@ -57,13 +57,13 @@
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <logback.version>1.5.32</logback.version>
-
-    <assertj-core.version>3.27.7</assertj-core.version>
+    <logback-access-project.version>2.0.12</logback-access-project.version>
 
     <junit-jupiter-api.version>5.9.1</junit-jupiter-api.version>
     <junit-vintage-engine.version>5.9.1</junit-vintage-engine.version>
     <junit-jupiter-params.version>5.9.1</junit-jupiter-params.version>
     <junit-platform.version>1.10.5</junit-platform.version>
+    <assertj-core.version>3.27.7</assertj-core.version>
 
     <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
     <hsqldb.version>2.5.1</hsqldb.version>
@@ -146,13 +146,14 @@
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
         <version>${logback.version}</version>
-      </dependency>        
+      </dependency>
 
       <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-access</artifactId>
-        <version>${logback.version}</version>
+        <groupId>ch.qos.logback.access</groupId>
+        <artifactId>logback-access-common</artifactId>
+        <version>${logback-access-project.version}</version>
       </dependency>
+
 
       <dependency>
         <groupId>ch.qos.logback.db</groupId>

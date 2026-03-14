@@ -41,12 +41,12 @@
       <groupId>ch.qos.logback.db</groupId>
       <artifactId>logback-core-db</artifactId>
     </dependency>
-
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-access</artifactId>
-    </dependency>
     
+    <dependency>
+      <groupId>ch.qos.logback.access</groupId>
+      <artifactId>logback-access-common</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
