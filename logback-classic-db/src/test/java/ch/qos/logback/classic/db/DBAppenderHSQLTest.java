@@ -13,17 +13,25 @@
  */
 package ch.qos.logback.classic.db;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
 
+import ch.qos.logback.classic.util.LogbackMDCAdapter;
 import org.slf4j.MDC;
-import org.junit.*;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -46,20 +54,21 @@ public class DBAppenderHSQLTest {
     int existingRowCount;
     Statement stmt;
 
-    @BeforeClass
+    @BeforeAll
     public static void beforeClass() throws SQLException {
         DB_APPENDER_HSQL_TEST_FIXTURE = new DBAppenderHSQLTestFixture();
         DB_APPENDER_HSQL_TEST_FIXTURE.setUp();
     }
 
-    @AfterClass
+    @AfterAll
     public static void afterClass() throws SQLException {
         DB_APPENDER_HSQL_TEST_FIXTURE.tearDown();
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws SQLException {
         lc = new LoggerContext();
+        lc.setMDCAdapter(new LogbackMDCAdapter());
         lc.setName("default");
         logger = lc.getLogger("root");
         appender = new DBAppender();
@@ -80,7 +89,7 @@ public class DBAppenderHSQLTest {
 
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws SQLException {
         logger = null;
         lc = null;
@@ -137,13 +146,13 @@ public class DBAppenderHSQLTest {
         rs.next();
         String expected = "java.lang.Exception: test Ex";
         String firstLine = rs.getString(3);
-        assertTrue("[" + firstLine + "] does not match [" + expected + "]", firstLine.contains(expected));
+        assertTrue(firstLine.contains(expected), "[" + firstLine + "] does not match [" + expected + "]");
 
         int i = 0;
         while (rs.next()) {
             expected = event.getThrowableProxy().getStackTraceElementProxyArray()[i].toString();
             String st = rs.getString(3);
-            assertTrue("[" + st + "] does not match [" + expected + "]", st.contains(expected));
+            assertTrue(st.contains(expected), "[" + st + "] does not match [" + expected + "]");
             i++;
         }
         assertTrue(i != 0);

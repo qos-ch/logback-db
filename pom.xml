@@ -7,7 +7,7 @@
 
   <groupId>ch.qos.logback.db</groupId>
   <artifactId>logback-parent-db</artifactId>
-  <version>1.2.11.1</version>
+  <version>1.5.32</version>
   <packaging>pom</packaging>
 
   <name>Logback-db-Parent</name>
@@ -23,13 +23,17 @@
 
   <licenses>
     <license>
-      <name>Eclipse Public License - v 1.0</name>
-      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+      <!-- https://spdx.org/licenses/EPL-2.0.html -->
+      <name>EPL-2.0</name>
+      <url>https://www.eclipse.org/legal/epl-v20.html</url>
+      <comments>Eclipse Public License 2.0</comments>
     </license>
 
     <license>
-      <name>GNU Lesser General Public License</name>
-      <url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
+      <!-- https://spdx.org/licenses/LGPL-2.1-only.html -->
+      <name>LGPL-2.1-only</name>
+      <url>https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
+      <comments>GNU Lesser General Public License v2.1 only</comments>
     </license>
   </licenses>
 
@@ -48,24 +52,33 @@
      <!-- yyyy-MM-dd'T'HH:mm:ss'Z' -->
     <project.build.outputTimestamp>2022-04-20T19:24:00Z</project.build.outputTimestamp>
 
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
+    <jdk.version>11</jdk.version>
+    <maven.compiler.release>${jdk.version}</maven.compiler.release>
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <logback.version>1.2.11</logback.version>
-    <junit.version>4.10</junit.version>      
-    <java.servlet-api.version>3.1.0</java.servlet-api.version>
+    <logback.version>1.5.32</logback.version>
+
+    <assertj-core.version>3.27.7</assertj-core.version>
+
+    <junit-jupiter-api.version>5.9.1</junit-jupiter-api.version>
+    <junit-vintage-engine.version>5.9.1</junit-vintage-engine.version>
+    <junit-jupiter-params.version>5.9.1</junit-jupiter-params.version>
+    <junit-platform.version>1.10.5</junit-platform.version>
+
+    <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
     <hsqldb.version>2.5.1</hsqldb.version>
     <h2.version>2.1.212</h2.version>
     <mysql.version>8.0.28</mysql.version>
     <postgresql.version>42.3.3</postgresql.version>
     
-    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-    <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>    
+    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
+    <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+
     <maven-site-plugin.version>3.7.1</maven-site-plugin.version>
     <maven-javadoc-plugin.version>3.1.0</maven-javadoc-plugin.version>
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
     <maven-license-plugin.version>3.0</maven-license-plugin.version>
-    <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
     <maven-jxr-plugin.version>3.1.1</maven-jxr-plugin.version>
     <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
 
@@ -86,22 +99,40 @@
   </developers>
 
   <dependencies>
+
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj-core.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit-jupiter-api.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit-jupiter-api.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>${junit-jupiter-api.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+
   </dependencies>
 
   <dependencyManagement>
     <dependencies>
 
-      <dependency>
-        <groupId>org.assertj</groupId>
-        <artifactId>assertj-core</artifactId>
-        <version>1.7.1</version>
-      </dependency>
 
 
       <!-- start of dependencies duplicated from logback-bom/pom.xml -->
@@ -337,36 +368,6 @@
                 </goals>
               </execution>
             </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <profile>
-      <id>cobertura</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-site-plugin</artifactId>
-            <configuration>
-              <reportPlugins>
-                
-                
-            
-                <plugin>
-                  <groupId>org.codehaus.mojo</groupId>
-                  <artifactId>cobertura-maven-plugin</artifactId>
-                  <version>${cobertura.maven.plugin.version}</version>
-                  <configuration>
-                    <formats>
-                      <format>html</format>
-                    </formats>
-                    <aggregate>true</aggregate>
-                  </configuration>
-                </plugin>
-              </reportPlugins>
-            </configuration>
           </plugin>
         </plugins>
       </build>

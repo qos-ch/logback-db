@@ -13,7 +13,6 @@
  */
 package ch.qos.logback.classic.db;
 
-import static org.junit.Assert.assertNotNull;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -23,6 +22,8 @@ import java.util.Properties;
 import org.h2.Driver;
 
 import ch.qos.logback.core.testUtil.RandomUtil;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DBAppenderH2TestFixture {
 

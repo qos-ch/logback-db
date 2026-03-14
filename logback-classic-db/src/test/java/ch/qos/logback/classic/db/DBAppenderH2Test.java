@@ -13,22 +13,18 @@
  */
 package ch.qos.logback.classic.db;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.Map;
 
-import ch.qos.logback.classic.spi.CallerData;
-import ch.qos.logback.core.status.StatusChecker;
+import ch.qos.logback.classic.util.LogbackMDCAdapter;
+import ch.qos.logback.core.status.testUtil.StatusChecker;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.MDC;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -38,10 +34,17 @@ import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.db.DriverManagerConnectionSource;
 import ch.qos.logback.core.testUtil.RandomUtil;
 import ch.qos.logback.core.util.StatusPrinter;
+import org.slf4j.spi.MDCAdapter;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class DBAppenderH2Test {
 
     LoggerContext loggerContext = new LoggerContext();;
+    MDCAdapter mdcAdapter = new LogbackMDCAdapter();
+
     Logger logger;
     DBAppender appender;
     DriverManagerConnectionSource connectionSource;
@@ -49,11 +52,13 @@ public class DBAppenderH2Test {
     int diff = RandomUtil.getPositiveInt();
     StatusChecker checker = new StatusChecker(loggerContext);
 
-    @Before
+    @BeforeEach
     public void setUp() throws SQLException {
+
+        loggerContext.setMDCAdapter(mdcAdapter);
+        loggerContext.setName("default");
         dbAppenderH2TestFixture = new DBAppenderH2TestFixture();
         dbAppenderH2TestFixture.setUp();
-        loggerContext.setName("default");
         logger = loggerContext.getLogger("root");
         appender = new DBAppender();
         appender.setName("DB");
@@ -71,7 +76,7 @@ public class DBAppenderH2Test {
         appender.start();
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws SQLException {
         logger = null;
         loggerContext = null;
@@ -121,13 +126,13 @@ public class DBAppenderH2Test {
         rs.next();
         String expected = "java.lang.Exception: test Ex";
         String firstLine = rs.getString(3);
-        assertTrue("[" + firstLine + "] does not match [" + expected + "]", firstLine.contains(expected));
+        assertTrue(firstLine.contains(expected), "[" + firstLine + "] does not match [" + expected + "]");
 
         int i = 0;
         while (rs.next()) {
             expected = event.getThrowableProxy().getStackTraceElementProxyArray()[i].toString();
             String st = rs.getString(3);
-            assertTrue("[" + st + "] does not match [" + expected + "]", st.contains(expected));
+            assertTrue(st.contains(expected), "[" + st + "] does not match [" + expected + "]");
             i++;
         }
         assertTrue(i != 0);

@@ -13,13 +13,13 @@
  */
 package ch.qos.logback.classic.db;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.Test;
 
 import ch.qos.logback.classic.db.names.DBNameResolver;
 import ch.qos.logback.classic.db.names.DefaultDBNameResolver;
 import ch.qos.logback.classic.db.names.SimpleDBNameResolver;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Tomasz Nurkiewicz

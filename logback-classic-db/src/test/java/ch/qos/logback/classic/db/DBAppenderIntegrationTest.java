@@ -17,11 +17,16 @@ import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
 import ch.qos.logback.core.db.DriverManagerConnectionSource;
 import ch.qos.logback.core.joran.spi.JoranException;
-import ch.qos.logback.core.status.StatusChecker;
+import ch.qos.logback.core.status.testUtil.StatusChecker;
 import ch.qos.logback.core.testUtil.RandomUtil;
 import ch.qos.logback.core.util.EnvUtil;
 import ch.qos.logback.core.util.StatusPrinter;
-import org.junit.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.MDC;
 
@@ -33,7 +38,8 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DBAppenderIntegrationTest {
 
@@ -46,22 +52,22 @@ public class DBAppenderIntegrationTest {
     int diff = RandomUtil.getPositiveInt();
     LoggerContext lc = new LoggerContext();
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         InetAddress localhostIA = InetAddress.getLocalHost();
         LOCAL_HOST_NAME = localhostIA.getHostName();
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() throws Exception {
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         lc.setName("lc" + diff);
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         // lc will never be used again
         lc.stop();
@@ -204,7 +210,7 @@ public class DBAppenderIntegrationTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void oracle11g() throws Exception {
         // perform test only on conforming hosts
         if (!isConformingHostAndJDK16OrHigher()) {

@@ -13,8 +13,8 @@
  */
 package ch.qos.logback.classic.db.names;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,7 +26,7 @@ public class SimpleDBNameResolverTest {
 
     private SimpleDBNameResolver nameResolver;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         nameResolver = new SimpleDBNameResolver();
         /*

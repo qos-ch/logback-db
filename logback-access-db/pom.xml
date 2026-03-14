@@ -8,7 +8,7 @@
   <parent>
     <groupId>ch.qos.logback.db</groupId>
     <artifactId>logback-parent-db</artifactId>
-    <version>1.2.11.1</version>
+    <version>1.5.32</version>
   </parent>
 
   <artifactId>logback-access-db</artifactId>
@@ -17,11 +17,6 @@
   <description>logback-access-db module</description>
 
   <dependencies>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <scope>test</scope>
-    </dependency>
 
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -36,11 +31,11 @@
     </dependency>
 
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>${java.servlet-api.version}</version>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>${jakarta.servlet.version}</version>
     </dependency>
-    
+
 
     <dependency>
       <groupId>ch.qos.logback.db</groupId>
@@ -88,7 +83,6 @@
             <id>bundle-test-jar</id>
             <phase>package</phase>
             <goals>
-              <goal>jar</goal>
               <goal>test-jar</goal>
             </goals>
           </execution>
