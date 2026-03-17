@@ -6,12 +6,12 @@ The logback-db project remedies this omission by providing `DBAppender` for `log
 
 More specifically, the `logback-classic-db` module contains `DBAppender` for `logback-classic` wheread the `logback-acess-db` module contains `DBAppender` for `logback-access`. Both modules require `logback-code-db` module as a prerequisite.
 
-Here are the Maven coordiates for the aforementioned  components:
+Here are the Maven coordinates for the aforementioned  components:
 
   `ch.qos.logback.db:logback-core-db:VERSION`  
   `ch.qos.logback.db:logback-classic-db:VERSION`  
   `ch.qos.logback.db:logback-access-db:VERSION`
  
-As of 2022-04-20, *1.2.11.1* was the latest release version.
+As of 2026-03-17, *1.5.32* is the latest release version.
 
 See also https://logback.qos.ch/news.html for the latest available release version.

@@ -50,7 +50,7 @@
 
   <properties>
      <!-- yyyy-MM-dd'T'HH:mm:ss'Z' -->
-    <project.build.outputTimestamp>2022-04-20T19:24:00Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2026-03-14T11:56:00Z</project.build.outputTimestamp>
 
     <jdk.version>11</jdk.version>
     <maven.compiler.release>${jdk.version}</maven.compiler.release>
@@ -81,7 +81,7 @@
     <maven-license-plugin.version>3.0</maven-license-plugin.version>
     <maven-jxr-plugin.version>3.1.1</maven-jxr-plugin.version>
     <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
-
+    <central-publishing-maven-plugin.version>0.9.0</central-publishing-maven-plugin.version>
   </properties>
 
   <developers>
@@ -305,18 +305,26 @@
           </execution>
         </executions>
       </plugin>
- 
+
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>${central-publishing-maven-plugin.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>central</publishingServerId>
+          <!-- new lines are apparently not tolerated -->
+          <excludeArtifacts>
+            logback-access-common-blackbox,logback-access-tomcat_10_1_blackbox,logback-access-tomcat_11_0_blackbox,logback-access-jetty11_blackbox,logback-access-jetty12_blackbox
+          </excludeArtifacts>
+        </configuration>
+      </plugin>
 
 
     </plugins>
   </build>
 
   <distributionManagement>
-
-    <site>
-      <id>qos_ch</id>
-      <url>scp://te.qos.ch/var/www/logback.qos.ch/htdocs/</url>
-    </site>
 
     <repository>
       <id>sonatype-nexus-staging</id>
